@@ -1,4 +1,4 @@
-package com.anderson.contasapagar.config.security;
+package com.anderson.contasapagar.infra.config.security;
 
 import java.util.Collection;
 import java.util.Map;
