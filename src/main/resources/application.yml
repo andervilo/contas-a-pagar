@@ -1,0 +1,23 @@
+spring:
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          issuer-uri: ${ISSUER_URI:http://localhost:7080/realms/contas-a-pagar-ms}
+          jwk-set-uri: ${JWK_URI:http://localhost:7080/realms/contas-a-pagar-ms/protocol/openid-connect/certs}
+  datasource:
+    url: jdbc:postgresql://${DB_HOST:localhost}:5432/contas
+    username: ${DB_USER:postgres}
+    password: ${DB_PASS:postgres}
+    driver-class-name: org.postgresql.Driver
+  jpa:
+    hibernate:
+      ddl-auto: validate
+    show-sql: true
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+
+config:
+  keycloak:
+    loginurl: ${KEYCLOACK_LOGIN_URL:http://localhost:7080/realms/contas-a-pagar-ms/protocol/openid-connect/token}
