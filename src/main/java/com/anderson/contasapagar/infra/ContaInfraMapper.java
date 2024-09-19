@@ -51,16 +51,25 @@ public interface ContaInfraMapper {
 
     @Named("fromDataVencimentoVO")
     default LocalDate fromDataVencimentoVO(DataVencimento dataVencimento) {
+        if(dataVencimento == null) {
+            return null;
+        }
         return dataVencimento.getData();
     }
 
     @Named("fromDataPagamentoVO")
     default LocalDateTime fromDataPagamentoVO(DataPagamento dataPagamento) {
+        if(dataPagamento == null) {
+            return null;
+        }
         return dataPagamento.getDataPagamento();
     }
 
     @Named("fromValorMonetarioVO")
     default BigDecimal fromValorMonetarioVO(ValorMonetario valor) {
+        if(valor == null) {
+            return null;
+        }
         return valor.getValor();
     }
 }

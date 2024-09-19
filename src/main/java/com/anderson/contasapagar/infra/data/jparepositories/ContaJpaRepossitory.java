@@ -16,11 +16,9 @@ public interface ContaJpaRepossitory extends JpaRepository<Conta, Long> {
     BigDecimal totalPagoPorPeriodo(LocalDateTime dataInicio, LocalDateTime dataFim);
 
     @Query(
-            """
-                SELECT c FROM Conta c 
-                WHERE (:dataVencimento IS NULL OR c.dataVencimento = :dataVencimento) 
-                AND (:descricao IS NULL OR c.descricao LIKE %:descricao%)"
-            """
+            "SELECT c FROM Conta c "+
+            "WHERE (:dataVencimento IS NULL OR c.dataVencimento = :dataVencimento) "+
+            "AND (:descricao IS NULL OR c.descricao LIKE %:descricao%)"
     )
     Page<Conta> buscarPorDataVencimentoEDescricao(LocalDate dataVencimento, String descricao, Pageable pageable);
 }

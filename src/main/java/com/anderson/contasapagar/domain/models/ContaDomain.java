@@ -1,5 +1,6 @@
 package com.anderson.contasapagar.domain.models;
 
+import com.anderson.contasapagar.domain.exceptions.CustomException;
 import com.anderson.contasapagar.domain.factories.DataPagamentoFactory;
 import com.anderson.contasapagar.domain.models.types.SituacaoPagamentoType;
 import com.anderson.contasapagar.domain.vos.DataPagamento;
@@ -30,6 +31,14 @@ public class ContaDomain {
         }
     }
 
+    public boolean isPago() {
+        return this.situacao == SituacaoPagamentoType.PAGO;
+    }
+
+    public boolean isPendente() {
+        return this.situacao == SituacaoPagamentoType.PENDENTE;
+    }
+
     public void pagar() {
         this.dataPagamento = DataPagamentoFactory.create(LocalDateTime.now());
         this.situacao = SituacaoPagamentoType.PAGO;
@@ -37,7 +46,7 @@ public class ContaDomain {
 
     public void  pagar(LocalDateTime dataPagamento) {
         if (dataPagamento.isAfter(LocalDateTime.now())) {
-            throw new IllegalArgumentException("A data de pagamento não pode ser no futuro.");
+            throw new CustomException(400,"A data de pagamento não pode ser no futuro.");
         }
         this.dataPagamento = DataPagamentoFactory.create(dataPagamento);
         this.situacao = SituacaoPagamentoType.PAGO;
