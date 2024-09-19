@@ -1,3 +1,10 @@
 package com.anderson.contasapagar.api.dto;
 
-public record AuthLogin(String password, String clientId, String grantType, String username) {}
+import com.anderson.contasapagar.api.validators.ValidAuthLogin;
+
+@ValidAuthLogin
+public record AuthLogin(
+        String password,
+        String clientId,
+        String grantType,
+        String username) {}

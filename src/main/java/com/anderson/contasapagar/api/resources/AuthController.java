@@ -1,5 +1,8 @@
-package com.anderson.contasapagar.api.auth;
+package com.anderson.contasapagar.api.resources;
 
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
@@ -17,14 +20,15 @@ import com.anderson.contasapagar.api.dto.AuthLogin;
 
 @RequestMapping("/auth/token")
 @RestController
+@Tag(name = "Autenticação", description = "API de Autnticação de Usuários")
 public class AuthController {
 
     @Value("${config.keycloak.loginurl}")
     private String keycloakLoginUrl;
 
     @PostMapping
-    public ResponseEntity<String> token(@RequestBody AuthLogin user) {
-
+    @Operation(summary = "Obter token de autenticação")
+    public ResponseEntity<String> token(@Valid @RequestBody AuthLogin user) {
 
         HttpHeaders headers = new HttpHeaders();
         RestTemplate rt = new RestTemplate();
@@ -39,7 +43,7 @@ public class AuthController {
         HttpEntity<MultiValueMap<String, String>> entity
          = new HttpEntity<MultiValueMap<String,String>>(formData, headers);
         
-       var result = rt.postForEntity(keycloakLoginUrl, entity, String.class);
+        var result = rt.postForEntity(keycloakLoginUrl, entity, String.class);
     
         return result;
     }
