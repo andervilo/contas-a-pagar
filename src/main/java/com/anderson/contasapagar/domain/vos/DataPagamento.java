@@ -5,6 +5,7 @@ import lombok.Getter;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.Objects;
 
 @Getter
 public class DataPagamento {
@@ -12,7 +13,7 @@ public class DataPagamento {
     private final LocalDateTime dataPagamento;
 
     public DataPagamento(LocalDateTime dataPagamento) {
-        if (dataPagamento.isAfter(LocalDateTime.now())) {
+        if (!Objects.isNull(dataPagamento) && dataPagamento.isAfter(LocalDateTime.now())) {
             throw new IllegalArgumentException("A data de pagamento não pode ser no futuro.");
         }
         this.dataPagamento = dataPagamento;
@@ -27,8 +28,8 @@ public class DataPagamento {
     }
 
     public boolean isWhithin(LocalDate _dataInicial, LocalDate _dataFinal) {
-        LocalDateTime dataInicial = LocalDateTime.of(_dataInicial.getYear(), _dataFinal.getMonth(), _dataFinal.getDayOfMonth(), 0, 0, 0);
-        LocalDateTime dataFinal = LocalDateTime.of(_dataFinal.getYear(), _dataFinal.getMonth(), _dataFinal.getDayOfMonth(), 23, 59, 59);
+        LocalDateTime dataInicial = _dataInicial.atTime(0,0,0);
+        LocalDateTime dataFinal = _dataFinal.atTime(23,59,59);
         return dataPagamento.isAfter(dataInicial) && dataPagamento.isBefore(dataFinal);
     }
 
@@ -38,6 +39,9 @@ public class DataPagamento {
     }
 
     public String formattedDate() {
+        if(Objects.isNull(dataPagamento)) {
+            return "";
+        }
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
         return dataPagamento.format(formatter);
     }
