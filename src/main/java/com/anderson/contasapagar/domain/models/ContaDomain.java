@@ -1,6 +1,7 @@
-package com.anderson.contasapagar.domain.models.types;
+package com.anderson.contasapagar.domain.models;
 
 import com.anderson.contasapagar.domain.factories.DataPagamentoFactory;
+import com.anderson.contasapagar.domain.models.types.SituacaoPagamentoType;
 import com.anderson.contasapagar.domain.vos.DataPagamento;
 import com.anderson.contasapagar.domain.vos.DataVencimento;
 import com.anderson.contasapagar.domain.vos.ValorMonetario;

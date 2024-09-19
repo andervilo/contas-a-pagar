@@ -7,6 +7,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 
@@ -22,7 +23,7 @@ public class Conta {
     private Long id;
     private LocalDate dataVencimento;
     private LocalDateTime dataPagamento;
-    private java.math.BigDecimal valor;
+    private BigDecimal valor;
     private String descricao;
     @Enumerated(EnumType.STRING)
     private SituacaoPagamentoType situacao;
