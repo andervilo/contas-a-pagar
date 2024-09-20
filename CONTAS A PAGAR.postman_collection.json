@@ -1,0 +1,435 @@
+{
+	"info": {
+		"_postman_id": "db9ab535-51a4-4d64-abcd-20dac6e41ae6",
+		"name": "CONTAS A PAGAR",
+		"description": "# 🚀 Get started here\n\nThis template guides you through CRUD operations (GET, POST, PUT, DELETE), variables, and tests.\n\n## 🔖 **How to use this template**\n\n#### **Step 1: Send requests**\n\nRESTful APIs allow you to perform CRUD operations using the POST, GET, PUT, and DELETE HTTP methods.\n\nThis collection contains each of these [request](https://learning.postman.com/docs/sending-requests/requests/) types. Open each request and click \"Send\" to see what happens.\n\n#### **Step 2: View responses**\n\nObserve the response tab for status code (200 OK), response time, and size.\n\n#### **Step 3: Send new Body data**\n\nUpdate or add new data in \"Body\" in the POST request. Typically, Body data is also used in PUT request.\n\n```\n{\n    \"name\": \"Add your name in the body\"\n}\n\n ```\n\n#### **Step 4: Update the variable**\n\nVariables enable you to store and reuse values in Postman. We have created a [variable](https://learning.postman.com/docs/sending-requests/variables/) called `base_url` with the sample request [https://postman-api-learner.glitch.me](https://postman-api-learner.glitch.me). Replace it with your API endpoint to customize this collection.\n\n#### **Step 5: Add tests in the \"Scripts\" tab**\n\nAdding tests to your requests can help you confirm that your API is working as expected. You can write test scripts in JavaScript and view the output in the \"Test Results\" tab.\n\n<img src=\"https://content.pstmn.io/fa30ea0a-373d-4545-a668-e7b283cca343/aW1hZ2UucG5n\" alt=\"\" height=\"1530\" width=\"2162\">\n\n## 💪 Pro tips\n\n- Use folders to group related requests and organize the collection.\n    \n- Add more [scripts](https://learning.postman.com/docs/writing-scripts/intro-to-scripts/) to verify if the API works as expected and execute workflows.\n    \n\n## 💡Related templates\n\n[API testing basics](https://go.postman.co/redirect/workspace?type=personal&collectionTemplateId=e9a37a28-055b-49cd-8c7e-97494a21eb54&sourceTemplateId=ddb19591-3097-41cf-82af-c84273e56719)  \n[API documentation](https://go.postman.co/redirect/workspace?type=personal&collectionTemplateId=e9c28f47-1253-44af-a2f3-20dce4da1f18&sourceTemplateId=ddb19591-3097-41cf-82af-c84273e56719)  \n[Authorization methods](https://go.postman.co/redirect/workspace?type=personal&collectionTemplateId=31a9a6ed-4cdf-4ced-984c-d12c9aec1c27&sourceTemplateId=ddb19591-3097-41cf-82af-c84273e56719)",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "232196"
+	},
+	"item": [
+		{
+			"name": "Auth",
+			"item": [
+				{
+					"name": "token API",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"password\": \"123456\",\n  \"clientId\": \"contas-a-pagar\",\n  \"grantType\": \"password\",\n  \"username\": \"contas\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/auth/token",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"auth",
+								"token"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "obter conta por id",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICJESXZZQV9HLXBsMUF2NjRodFJKOVdneW55MTRQY0VpTnNtMG9OZFF4NGxFIn0.eyJleHAiOjE3MjY4NDQxMzUsImlhdCI6MTcyNjg0MzgzNSwianRpIjoiNWM1YWE4YTctZWIzZC00YjgxLWI4ZDctOTRhMGRlODA0Yjk4IiwiaXNzIjoiaHR0cDovL2tleWNsb2FrOjcwODAvcmVhbG1zL2NvbnRhcy1hLXBhZ2FyLW1zIiwic3ViIjoiMjVmYWViNGUtZDE1OC00MDBlLWI1MjEtMzYxN2I2ZmRjMjg5IiwidHlwIjoiQmVhcmVyIiwiYXpwIjoiY29udGFzLWEtcGFnYXIiLCJzZXNzaW9uX3N0YXRlIjoiNGIyZTIzOTAtMTFmMi00YzgwLThiM2YtZWUxMTA0NTljYzY0IiwiYWNyIjoiMSIsInJlYWxtX2FjY2VzcyI6eyJyb2xlcyI6WyJST0xFX0FETUlOIl19LCJzY29wZSI6InByb2ZpbGUgZW1haWwiLCJzaWQiOiI0YjJlMjM5MC0xMWYyLTRjODAtOGIzZi1lZTExMDQ1OWNjNjQiLCJlbWFpbF92ZXJpZmllZCI6ZmFsc2UsInByZWZlcnJlZF91c2VybmFtZSI6ImNvbnRhcyIsImdpdmVuX25hbWUiOiIiLCJmYW1pbHlfbmFtZSI6IiJ9.IYyEDs5fXVwB06xdWM1jPO8oruG-G0edLsiOCBGra0xJsAIH_YhQt6S7X998fDzMWpgvaDUq3_PGT-FTk9JzzkSPmL8EYju2SQ5hZy6o8kw8XEjN6wEnE8uHobANM9Xcjt9kveFfuLQQTmhYlzY0GEeDuKfdQnbadktsBJQZcs6waxeSd83fKGi4z4rHePDajrUMRvMlCk-uvLj-Zh9TCCT0XqNpoNPcToPfpoWMkjd0ipSHl0kuYXMe2LX7QXZvJ0KIxWrUgzCRYVbotl6Z8dHsVudzSXsDuih_S_lJUuOEMc1I5PzCF6-sWoFw8Kgjr_6SpYkK2LnrjcDQT9PXaQ",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/v1/contas/5",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"contas",
+						"5"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "obter total por periodo",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICJ5a3ctWWZLWkdnYXdtYzJaM3ZfazRDLUlmZ1RwODFIb0I4ZUkwaURoZlJrIn0.eyJleHAiOjE3MjY4NDEyMDEsImlhdCI6MTcyNjg0MDkwMSwianRpIjoiNjIxNzYyMTYtYmU3Ny00YWVmLTk5YTktMjJlODIwMzUwYTUzIiwiaXNzIjoiaHR0cDovL2tleWNsb2FrOjcwODAvcmVhbG1zL2NvbnRhcy1hLXBhZ2FyLW1zIiwic3ViIjoiNzc2Yjc4MWItOTFkZi00YTcyLWE1NWItMmQyMzZiZTlkMzg3IiwidHlwIjoiQmVhcmVyIiwiYXpwIjoiY29udGFzLWEtcGFnYXIiLCJzZXNzaW9uX3N0YXRlIjoiYWI1ZDhjNzMtOTc2Zi00ODAyLTlmOTEtZDU2MWI5ZjAyNDY0IiwiYWNyIjoiMSIsInJlYWxtX2FjY2VzcyI6eyJyb2xlcyI6WyJST0xFX0FETUlOIl19LCJzY29wZSI6InByb2ZpbGUgZW1haWwiLCJzaWQiOiJhYjVkOGM3My05NzZmLTQ4MDItOWY5MS1kNTYxYjlmMDI0NjQiLCJlbWFpbF92ZXJpZmllZCI6ZmFsc2UsInByZWZlcnJlZF91c2VybmFtZSI6ImNvbnRhcyIsImdpdmVuX25hbWUiOiIiLCJmYW1pbHlfbmFtZSI6IiJ9.q1D16CVYVJv8BYHKazwCun01kneHDUy-7tHJP-JuuL9oa1vy2ABEOdxIJOYUpUvdziF8ii-7Ob5j60LwzAcMRXlfdojxiKa7uQaSLaYdzZWjn1lYEJM_j5OZsUJgC3AujX_eah-zx1TiSChOo30J0m6woczgsGdSJML-BrXlD_Btg3pHMFbKJN4XJaMamEKi5f9B_swwpAINMsmCQ3tTBiku60kjG1grT589B68dzitKT72nZi76WOZ4dUiI9hQyqRsAHMMgoUGxDWv0eyHmrCZXHFJSLcPppxvxUJaetqDqml6TRSmYvIweaBUc5XO4fazoalE0s6CDHW0bB4G2xw",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/v1/contas/total-pago/2024-01-01/2024-09-20",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"contas",
+						"total-pago",
+						"2024-01-01",
+						"2024-09-20"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "listar",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICJ5a3ctWWZLWkdnYXdtYzJaM3ZfazRDLUlmZ1RwODFIb0I4ZUkwaURoZlJrIn0.eyJleHAiOjE3MjY4NDI0OTIsImlhdCI6MTcyNjg0MjE5MiwianRpIjoiNjMwZjcxOWYtYmIxZi00OWFjLTkzMDMtODljMjJiMjZlODliIiwiaXNzIjoiaHR0cDovL2tleWNsb2FrOjcwODAvcmVhbG1zL2NvbnRhcy1hLXBhZ2FyLW1zIiwic3ViIjoiNzc2Yjc4MWItOTFkZi00YTcyLWE1NWItMmQyMzZiZTlkMzg3IiwidHlwIjoiQmVhcmVyIiwiYXpwIjoiY29udGFzLWEtcGFnYXIiLCJzZXNzaW9uX3N0YXRlIjoiNjM1MDRmM2EtOWNhMS00ZDQ4LTllNGYtZTFiNmFmOTFhNjllIiwiYWNyIjoiMSIsInJlYWxtX2FjY2VzcyI6eyJyb2xlcyI6WyJST0xFX0FETUlOIl19LCJzY29wZSI6InByb2ZpbGUgZW1haWwiLCJzaWQiOiI2MzUwNGYzYS05Y2ExLTRkNDgtOWU0Zi1lMWI2YWY5MWE2OWUiLCJlbWFpbF92ZXJpZmllZCI6ZmFsc2UsInByZWZlcnJlZF91c2VybmFtZSI6ImNvbnRhcyIsImdpdmVuX25hbWUiOiIiLCJmYW1pbHlfbmFtZSI6IiJ9.JjBDrslWmynSgmJkQ_M4ueZJperNPqAVwTqX4U3kDmyRdqFyMst-x6sqZVn58MAV1OSdTBkP4tNeCfMYtacLCOEVxhUjoLeQR1gMK2F60Gay1bqk40vzTeuGr4OWGWiHH9dIK7yyvirxGHhSzKs0Lr5fQdwPoGPuN9VwNXWqtShu690Ff2JEzZ8G_cBkhqk-y5enUMXnOmDjLv0Gvzo5mjwBysidjFVYr318Eu5lLvV1AFQnCf2b6llKl3zBAuPbazjbA96NkGCHvViSMacBPVl-nN7v_m78cIdNE-9ibQu4XIKjZv2uGjI6Bc08bR_yyR2oHovs7wkX36bZrMFUfw",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"dataVencimento\": \"2024-09-20\",\n  \"descricao\": \"\",\n  \"page\": 0,\n  \"size\": 0\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/v1/contas/listar",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"contas",
+						"listar"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "pagar conta",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICJ5a3ctWWZLWkdnYXdtYzJaM3ZfazRDLUlmZ1RwODFIb0I4ZUkwaURoZlJrIn0.eyJleHAiOjE3MjY4NDEyMDEsImlhdCI6MTcyNjg0MDkwMSwianRpIjoiNjIxNzYyMTYtYmU3Ny00YWVmLTk5YTktMjJlODIwMzUwYTUzIiwiaXNzIjoiaHR0cDovL2tleWNsb2FrOjcwODAvcmVhbG1zL2NvbnRhcy1hLXBhZ2FyLW1zIiwic3ViIjoiNzc2Yjc4MWItOTFkZi00YTcyLWE1NWItMmQyMzZiZTlkMzg3IiwidHlwIjoiQmVhcmVyIiwiYXpwIjoiY29udGFzLWEtcGFnYXIiLCJzZXNzaW9uX3N0YXRlIjoiYWI1ZDhjNzMtOTc2Zi00ODAyLTlmOTEtZDU2MWI5ZjAyNDY0IiwiYWNyIjoiMSIsInJlYWxtX2FjY2VzcyI6eyJyb2xlcyI6WyJST0xFX0FETUlOIl19LCJzY29wZSI6InByb2ZpbGUgZW1haWwiLCJzaWQiOiJhYjVkOGM3My05NzZmLTQ4MDItOWY5MS1kNTYxYjlmMDI0NjQiLCJlbWFpbF92ZXJpZmllZCI6ZmFsc2UsInByZWZlcnJlZF91c2VybmFtZSI6ImNvbnRhcyIsImdpdmVuX25hbWUiOiIiLCJmYW1pbHlfbmFtZSI6IiJ9.q1D16CVYVJv8BYHKazwCun01kneHDUy-7tHJP-JuuL9oa1vy2ABEOdxIJOYUpUvdziF8ii-7Ob5j60LwzAcMRXlfdojxiKa7uQaSLaYdzZWjn1lYEJM_j5OZsUJgC3AujX_eah-zx1TiSChOo30J0m6woczgsGdSJML-BrXlD_Btg3pHMFbKJN4XJaMamEKi5f9B_swwpAINMsmCQ3tTBiku60kjG1grT589B68dzitKT72nZi76WOZ4dUiI9hQyqRsAHMMgoUGxDWv0eyHmrCZXHFJSLcPppxvxUJaetqDqml6TRSmYvIweaBUc5XO4fazoalE0s6CDHW0bB4G2xw",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/v1/contas/pagar/2",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"contas",
+						"pagar",
+						"2"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "pagar conta por data",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICJ5a3ctWWZLWkdnYXdtYzJaM3ZfazRDLUlmZ1RwODFIb0I4ZUkwaURoZlJrIn0.eyJleHAiOjE3MjY4NDA3NTksImlhdCI6MTcyNjg0MDQ1OSwianRpIjoiZTJkMDAwMTItMzVkMC00NTlhLTkwMDctZmNmY2U0MjVjOTNkIiwiaXNzIjoiaHR0cDovL2tleWNsb2FrOjcwODAvcmVhbG1zL2NvbnRhcy1hLXBhZ2FyLW1zIiwic3ViIjoiNzc2Yjc4MWItOTFkZi00YTcyLWE1NWItMmQyMzZiZTlkMzg3IiwidHlwIjoiQmVhcmVyIiwiYXpwIjoiY29udGFzLWEtcGFnYXIiLCJzZXNzaW9uX3N0YXRlIjoiYWNlOTU2MTItMzBjNi00NDRmLTk5MWYtMGJhZWQzN2UyODZkIiwiYWNyIjoiMSIsInJlYWxtX2FjY2VzcyI6eyJyb2xlcyI6WyJST0xFX0FETUlOIl19LCJzY29wZSI6InByb2ZpbGUgZW1haWwiLCJzaWQiOiJhY2U5NTYxMi0zMGM2LTQ0NGYtOTkxZi0wYmFlZDM3ZTI4NmQiLCJlbWFpbF92ZXJpZmllZCI6ZmFsc2UsInByZWZlcnJlZF91c2VybmFtZSI6ImNvbnRhcyIsImdpdmVuX25hbWUiOiIiLCJmYW1pbHlfbmFtZSI6IiJ9.OFIBZcauNoFxuM7cIRXaaqK16N_qkKU_i2arN5sIBV9s8S_iziuVZ7cZ40DUaKucBSI-jhb_Rsm9UWXVDl_gC2FwK1aTW_J7xt50YWWYc0nPYY5OEo16-ibQdTXa9Fc_doA184v72UgdW3MyOBnFYnqMjkP76ExVNVake8u09W0IVKgoquPLAONRmJF940EYh5BV2U8Gxm8XdDaFl3XQ5oB4KWRjvnUx5Qq8i887RrPUE8NV8JXjdxMkKN4SZRt90rL0s0EQG6Xz1udh_MWbKWQI5zHvotILv7uZPIo8m21K5tylX--LfypKYfsYtZIxk4Zf_lchCwgcsnhbdodSKA",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/v1/contas/pagar/1/2024-09-20T10:00:00",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"contas",
+						"pagar",
+						"1",
+						"2024-09-20T10:00:00"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "cancelar conta",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICJ5a3ctWWZLWkdnYXdtYzJaM3ZfazRDLUlmZ1RwODFIb0I4ZUkwaURoZlJrIn0.eyJleHAiOjE3MjY4NDA3NTksImlhdCI6MTcyNjg0MDQ1OSwianRpIjoiZTJkMDAwMTItMzVkMC00NTlhLTkwMDctZmNmY2U0MjVjOTNkIiwiaXNzIjoiaHR0cDovL2tleWNsb2FrOjcwODAvcmVhbG1zL2NvbnRhcy1hLXBhZ2FyLW1zIiwic3ViIjoiNzc2Yjc4MWItOTFkZi00YTcyLWE1NWItMmQyMzZiZTlkMzg3IiwidHlwIjoiQmVhcmVyIiwiYXpwIjoiY29udGFzLWEtcGFnYXIiLCJzZXNzaW9uX3N0YXRlIjoiYWNlOTU2MTItMzBjNi00NDRmLTk5MWYtMGJhZWQzN2UyODZkIiwiYWNyIjoiMSIsInJlYWxtX2FjY2VzcyI6eyJyb2xlcyI6WyJST0xFX0FETUlOIl19LCJzY29wZSI6InByb2ZpbGUgZW1haWwiLCJzaWQiOiJhY2U5NTYxMi0zMGM2LTQ0NGYtOTkxZi0wYmFlZDM3ZTI4NmQiLCJlbWFpbF92ZXJpZmllZCI6ZmFsc2UsInByZWZlcnJlZF91c2VybmFtZSI6ImNvbnRhcyIsImdpdmVuX25hbWUiOiIiLCJmYW1pbHlfbmFtZSI6IiJ9.OFIBZcauNoFxuM7cIRXaaqK16N_qkKU_i2arN5sIBV9s8S_iziuVZ7cZ40DUaKucBSI-jhb_Rsm9UWXVDl_gC2FwK1aTW_J7xt50YWWYc0nPYY5OEo16-ibQdTXa9Fc_doA184v72UgdW3MyOBnFYnqMjkP76ExVNVake8u09W0IVKgoquPLAONRmJF940EYh5BV2U8Gxm8XdDaFl3XQ5oB4KWRjvnUx5Qq8i887RrPUE8NV8JXjdxMkKN4SZRt90rL0s0EQG6Xz1udh_MWbKWQI5zHvotILv7uZPIo8m21K5tylX--LfypKYfsYtZIxk4Zf_lchCwgcsnhbdodSKA",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/v1/contas/cancelar/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"contas",
+						"cancelar",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "reabrir conta",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICJ5a3ctWWZLWkdnYXdtYzJaM3ZfazRDLUlmZ1RwODFIb0I4ZUkwaURoZlJrIn0.eyJleHAiOjE3MjY4NDA3NTksImlhdCI6MTcyNjg0MDQ1OSwianRpIjoiZTJkMDAwMTItMzVkMC00NTlhLTkwMDctZmNmY2U0MjVjOTNkIiwiaXNzIjoiaHR0cDovL2tleWNsb2FrOjcwODAvcmVhbG1zL2NvbnRhcy1hLXBhZ2FyLW1zIiwic3ViIjoiNzc2Yjc4MWItOTFkZi00YTcyLWE1NWItMmQyMzZiZTlkMzg3IiwidHlwIjoiQmVhcmVyIiwiYXpwIjoiY29udGFzLWEtcGFnYXIiLCJzZXNzaW9uX3N0YXRlIjoiYWNlOTU2MTItMzBjNi00NDRmLTk5MWYtMGJhZWQzN2UyODZkIiwiYWNyIjoiMSIsInJlYWxtX2FjY2VzcyI6eyJyb2xlcyI6WyJST0xFX0FETUlOIl19LCJzY29wZSI6InByb2ZpbGUgZW1haWwiLCJzaWQiOiJhY2U5NTYxMi0zMGM2LTQ0NGYtOTkxZi0wYmFlZDM3ZTI4NmQiLCJlbWFpbF92ZXJpZmllZCI6ZmFsc2UsInByZWZlcnJlZF91c2VybmFtZSI6ImNvbnRhcyIsImdpdmVuX25hbWUiOiIiLCJmYW1pbHlfbmFtZSI6IiJ9.OFIBZcauNoFxuM7cIRXaaqK16N_qkKU_i2arN5sIBV9s8S_iziuVZ7cZ40DUaKucBSI-jhb_Rsm9UWXVDl_gC2FwK1aTW_J7xt50YWWYc0nPYY5OEo16-ibQdTXa9Fc_doA184v72UgdW3MyOBnFYnqMjkP76ExVNVake8u09W0IVKgoquPLAONRmJF940EYh5BV2U8Gxm8XdDaFl3XQ5oB4KWRjvnUx5Qq8i887RrPUE8NV8JXjdxMkKN4SZRt90rL0s0EQG6Xz1udh_MWbKWQI5zHvotILv7uZPIo8m21K5tylX--LfypKYfsYtZIxk4Zf_lchCwgcsnhbdodSKA",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/v1/contas/reabrir/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"contas",
+						"reabrir",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "criar conta",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICJESXZZQV9HLXBsMUF2NjRodFJKOVdneW55MTRQY0VpTnNtMG9OZFF4NGxFIn0.eyJleHAiOjE3MjY4NDQxMzUsImlhdCI6MTcyNjg0MzgzNSwianRpIjoiNWM1YWE4YTctZWIzZC00YjgxLWI4ZDctOTRhMGRlODA0Yjk4IiwiaXNzIjoiaHR0cDovL2tleWNsb2FrOjcwODAvcmVhbG1zL2NvbnRhcy1hLXBhZ2FyLW1zIiwic3ViIjoiMjVmYWViNGUtZDE1OC00MDBlLWI1MjEtMzYxN2I2ZmRjMjg5IiwidHlwIjoiQmVhcmVyIiwiYXpwIjoiY29udGFzLWEtcGFnYXIiLCJzZXNzaW9uX3N0YXRlIjoiNGIyZTIzOTAtMTFmMi00YzgwLThiM2YtZWUxMTA0NTljYzY0IiwiYWNyIjoiMSIsInJlYWxtX2FjY2VzcyI6eyJyb2xlcyI6WyJST0xFX0FETUlOIl19LCJzY29wZSI6InByb2ZpbGUgZW1haWwiLCJzaWQiOiI0YjJlMjM5MC0xMWYyLTRjODAtOGIzZi1lZTExMDQ1OWNjNjQiLCJlbWFpbF92ZXJpZmllZCI6ZmFsc2UsInByZWZlcnJlZF91c2VybmFtZSI6ImNvbnRhcyIsImdpdmVuX25hbWUiOiIiLCJmYW1pbHlfbmFtZSI6IiJ9.IYyEDs5fXVwB06xdWM1jPO8oruG-G0edLsiOCBGra0xJsAIH_YhQt6S7X998fDzMWpgvaDUq3_PGT-FTk9JzzkSPmL8EYju2SQ5hZy6o8kw8XEjN6wEnE8uHobANM9Xcjt9kveFfuLQQTmhYlzY0GEeDuKfdQnbadktsBJQZcs6waxeSd83fKGi4z4rHePDajrUMRvMlCk-uvLj-Zh9TCCT0XqNpoNPcToPfpoWMkjd0ipSHl0kuYXMe2LX7QXZvJ0KIxWrUgzCRYVbotl6Z8dHsVudzSXsDuih_S_lJUuOEMc1I5PzCF6-sWoFw8Kgjr_6SpYkK2LnrjcDQT9PXaQ",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"dataVencimento\": \"2024-09-20\",\n  \"valor\": 645.49,\n  \"descricao\": \"Energia mês de agosto\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/v1/contas",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"contas"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "atualizar conta",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICJESXZZQV9HLXBsMUF2NjRodFJKOVdneW55MTRQY0VpTnNtMG9OZFF4NGxFIn0.eyJleHAiOjE3MjY4NDQxMzUsImlhdCI6MTcyNjg0MzgzNSwianRpIjoiNWM1YWE4YTctZWIzZC00YjgxLWI4ZDctOTRhMGRlODA0Yjk4IiwiaXNzIjoiaHR0cDovL2tleWNsb2FrOjcwODAvcmVhbG1zL2NvbnRhcy1hLXBhZ2FyLW1zIiwic3ViIjoiMjVmYWViNGUtZDE1OC00MDBlLWI1MjEtMzYxN2I2ZmRjMjg5IiwidHlwIjoiQmVhcmVyIiwiYXpwIjoiY29udGFzLWEtcGFnYXIiLCJzZXNzaW9uX3N0YXRlIjoiNGIyZTIzOTAtMTFmMi00YzgwLThiM2YtZWUxMTA0NTljYzY0IiwiYWNyIjoiMSIsInJlYWxtX2FjY2VzcyI6eyJyb2xlcyI6WyJST0xFX0FETUlOIl19LCJzY29wZSI6InByb2ZpbGUgZW1haWwiLCJzaWQiOiI0YjJlMjM5MC0xMWYyLTRjODAtOGIzZi1lZTExMDQ1OWNjNjQiLCJlbWFpbF92ZXJpZmllZCI6ZmFsc2UsInByZWZlcnJlZF91c2VybmFtZSI6ImNvbnRhcyIsImdpdmVuX25hbWUiOiIiLCJmYW1pbHlfbmFtZSI6IiJ9.IYyEDs5fXVwB06xdWM1jPO8oruG-G0edLsiOCBGra0xJsAIH_YhQt6S7X998fDzMWpgvaDUq3_PGT-FTk9JzzkSPmL8EYju2SQ5hZy6o8kw8XEjN6wEnE8uHobANM9Xcjt9kveFfuLQQTmhYlzY0GEeDuKfdQnbadktsBJQZcs6waxeSd83fKGi4z4rHePDajrUMRvMlCk-uvLj-Zh9TCCT0XqNpoNPcToPfpoWMkjd0ipSHl0kuYXMe2LX7QXZvJ0KIxWrUgzCRYVbotl6Z8dHsVudzSXsDuih_S_lJUuOEMc1I5PzCF6-sWoFw8Kgjr_6SpYkK2LnrjcDQT9PXaQ",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"id\": 5,\n    \"dataVencimento\": \"2024-09-20\",\n    \"dataPagamento\": \"\",\n    \"valor\": 695.49,\n    \"descricao\": \"Energia mês de agosto\",\n    \"situacao\": \"PENDENTE\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/v1/contas",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"contas"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "upload csv",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICJEYXBOTVZaMDhTLTk2LW5odmlnLXVuSHNmZEtxbGx4M2R3ZXowTUx2bm1VIn0.eyJleHAiOjE3MjY3NDQ4MjksImlhdCI6MTcyNjc0NDUyOSwianRpIjoiYmM2MWY0NTctZmE5NC00YTM0LWEwODEtY2M3MTUxYzUyNDE0IiwiaXNzIjoiaHR0cDovL2xvY2FsaG9zdDo3MDgwL3JlYWxtcy9jb250YXMtYS1wYWdhci1tcyIsInN1YiI6IjdkOWNkMzczLWI2MjItNDEyNS1hNmU1LWI0OTBlN2ZhNGE2ZCIsInR5cCI6IkJlYXJlciIsImF6cCI6ImNvbnRhcy1hLXBhZ2FyIiwic2Vzc2lvbl9zdGF0ZSI6ImI4ZWZlZTA5LTBlNzEtNGZmZi04MWEwLThjYjhlMTM2MDYwNyIsImFjciI6IjEiLCJyZWFsbV9hY2Nlc3MiOnsicm9sZXMiOlsiUk9MRV9BRE1JTiJdfSwic2NvcGUiOiJwcm9maWxlIGVtYWlsIiwic2lkIjoiYjhlZmVlMDktMGU3MS00ZmZmLTgxYTAtOGNiOGUxMzYwNjA3IiwiZW1haWxfdmVyaWZpZWQiOmZhbHNlLCJwcmVmZXJyZWRfdXNlcm5hbWUiOiJjb250YXMiLCJnaXZlbl9uYW1lIjoiIiwiZmFtaWx5X25hbWUiOiIifQ.cOrcXq8IBXiFo7juXcc_gk0gI1p2VrRmxcMFjJhz0zIJiCKJioI4HTZusNnw1XDpeZnHRzYp6x1YNaLnrS4IVmyYZSv7374kVcEEAgXQTscg8tg8rVXvAaqPAsJCwFnnl2V0cXf48J4mZ8xVUrU5Ez-7aewiKDs_D4-qPPniTBeIFNE6f4fsb0XpWOBYFiewb-eZx13UtN_-4v3AMUztZx6UbvlX5NR7CF3FJbjJ5KjYCX21LbcXR4wobF4Sjskk9MObgKdgyMhR7m3GogXfnpGOSmV2KANR8YfHdQP8Q7gEegUlIUIHsOgaKje3V8v7W7nS0Jqa6PcLY4bowC3hMw",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"dataVencimento\": \"2024-09-19\",\n  \"valor\": 1200,\n  \"descricao\": \"Energia mês de agosto\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/v1/contas",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"contas"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "id",
+			"value": "1"
+		},
+		{
+			"key": "base_url",
+			"value": "https://postman-rest-api-learner.glitch.me/"
+		}
+	]
+}
