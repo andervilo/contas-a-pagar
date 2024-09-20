@@ -48,6 +48,26 @@ services:
     networks:
       - backend
 
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: contas-app
+    environment:
+      ISSUER_URI: http://keycloak:7080/realms/contas-a-pagar-ms
+      JWK_URI: http://keycloak:7080/realms/contas-a-pagar-ms/protocol/openid-connect/certs
+      DB_HOST: postgres
+      DB_USER: postgres
+      DB_PASS: postgres
+      KEYCLOACK_LOGIN_URL: http://keycloak:7080/realms/contas-a-pagar-ms/protocol/openid-connect/token
+    ports:
+      - "8080:8080"
+    depends_on:
+      - postgres
+      - keycloak
+    networks:
+      - backend
+
 volumes:
   postgres_data:
 
