@@ -18,6 +18,7 @@ import org.mapstruct.Named;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Mapper(componentModel = "spring")
 public interface ContaApiMapper {
@@ -41,6 +42,8 @@ public interface ContaApiMapper {
             @Mapping(target = "valor", source = "valor", qualifiedByName = "toValorMonetarioVO")
     })
     ContaDomain toDomain(ContaCreateRequest contaRequest);
+
+    List<ContaResponse> toResponseList(List<ContaDomain> contas);
 
     @Named("fromDataVencimentoVO")
     default String fromDataVencimentoVO(DataVencimento dataVencimento) {

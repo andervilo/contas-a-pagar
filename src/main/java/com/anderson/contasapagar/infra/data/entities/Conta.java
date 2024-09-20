@@ -21,7 +21,11 @@ public class Conta {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    @Temporal(TemporalType.DATE)
+    @Column(name = "data_vencimento")
     private LocalDate dataVencimento;
+
     private LocalDateTime dataPagamento;
     private BigDecimal valor;
     private String descricao;

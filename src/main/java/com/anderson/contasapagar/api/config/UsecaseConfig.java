@@ -18,6 +18,11 @@ public class UsecaseConfig {
     }
 
     @Bean
+    public ImportarConta importarConta() {
+        return new ImportarConta(contaDomainRepository);
+    }
+
+    @Bean
     public AtualizarConta buscarConta() {
         return new AtualizarConta(contaDomainRepository);
     }

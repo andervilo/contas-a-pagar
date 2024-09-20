@@ -1,4 +1,4 @@
-package com.anderson.contasapagar.infra;
+package com.anderson.contasapagar.infra.mapper;
 
 import com.anderson.contasapagar.domain.models.ContaDomain;
 import com.anderson.contasapagar.domain.vos.DataPagamento;

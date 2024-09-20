@@ -9,6 +9,7 @@ import java.time.LocalDateTime;
 
 @Builder
 public record ContaRequest(
+        Long id,
         LocalDate dataVencimento,
         LocalDateTime dataPagamento,
         BigDecimal valor,

@@ -15,9 +15,6 @@ public class DataVencimento {
         if (data == null) {
             throw new CustomException(400,"A data de vencimento não pode ser nula.");
         }
-        if (data.isBefore(LocalDate.now())) {
-            throw new CustomException(400,"A data de vencimento não pode ser no passado.");
-        }
         this.data = data;
     }
 

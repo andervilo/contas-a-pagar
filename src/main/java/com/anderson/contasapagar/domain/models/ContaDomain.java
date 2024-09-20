@@ -25,12 +25,6 @@ public class ContaDomain {
     private String descricao;
     private SituacaoPagamentoType situacao;
 
-    public void verificarVecimento() {
-        if (this.dataVencimento.isVencida()) {
-            this.situacao = SituacaoPagamentoType.VENCIDO;
-        }
-    }
-
     public boolean isPago() {
         return this.situacao == SituacaoPagamentoType.PAGO;
     }

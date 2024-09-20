@@ -4,7 +4,7 @@ import com.anderson.contasapagar.domain.models.ContaDomain;
 import com.anderson.contasapagar.domain.repositories.ContaDomainRepository;
 import com.anderson.contasapagar.domain.vos.FiltroPaginado;
 import com.anderson.contasapagar.domain.vos.PageDomain;
-import com.anderson.contasapagar.infra.ContaInfraMapper;
+import com.anderson.contasapagar.infra.mapper.ContaInfraMapper;
 import com.anderson.contasapagar.infra.data.entities.Conta;
 import com.anderson.contasapagar.infra.data.jparepositories.ContaJpaRepossitory;
 import com.anderson.contasapagar.infra.execeptions.ContaNotFoundExcetion;
@@ -16,6 +16,8 @@ import org.springframework.stereotype.Component;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.Objects;
 
 @Component
 @RequiredArgsConstructor
@@ -52,14 +54,23 @@ public class ContaRepositoryAdapter implements ContaDomainRepository {
 
     @Override
     public PageDomain<ContaDomain> findByDataVencimentoDescricao(FiltroPaginado filtroPaginado) {
+        var descricao = Objects.isNull(filtroPaginado.descricao()) || filtroPaginado.descricao().isEmpty() ? null :
+                "%"+filtroPaginado.descricao().toUpperCase()+"%";
+        var dataVencimento = Objects.isNull(filtroPaginado.dataVencimento()) ? null :
+                filtroPaginado.dataVencimento().format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
         var pageable = PageRequest.of(filtroPaginado.page(), filtroPaginado.size());
-        var page = contaJpaRepossitory.buscarPorDataVencimentoEDescricao(filtroPaginado.dataVencimento(), filtroPaginado.descricao(), pageable);
+
+        var page = contaJpaRepossitory.buscarPorDataVencimentoEDescricao(
+                dataVencimento,
+                descricao,
+                pageable);
         return getPageDomain(page);
     }
 
     @Override
     public BigDecimal sumByPeriodo(LocalDate dataInicio, LocalDate dataFim) {
-        return contaJpaRepossitory.totalPagoPorPeriodo(dataInicio.atStartOfDay(), dataFim.atTime(23, 59, 59));
+        var valorPago = contaJpaRepossitory.totalPagoPorPeriodo(dataInicio.atStartOfDay(), dataFim.atTime(23, 59, 59));
+        return Objects.isNull(valorPago) ? BigDecimal.ZERO : valorPago;
     }
 
     private PageDomain<ContaDomain> getPageDomain(Page<Conta> page) {
