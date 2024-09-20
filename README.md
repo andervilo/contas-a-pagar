@@ -17,7 +17,7 @@ docker compose up -d --build
  
  - Acesse http://localhost:8080/swagger-ui/index.html para ver a documentação da API;
  - Também é possível importar a collection <strong>CONTAS A PAGAR.postman_collection.json</strong> localizada na raiz do projeto, no Postman;
- - o CRUL para fazer login e obter o token que permite realizar as operações na API é:
+ - o CURL para fazer login e obter o token que permite realizar as operações na API é:
 ```
 curl --location 'http://localhost:8080/auth/token' \
 --header 'Content-Type: application/json' \
