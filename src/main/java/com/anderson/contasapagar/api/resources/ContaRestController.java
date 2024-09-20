@@ -13,6 +13,8 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
@@ -23,7 +25,7 @@ import java.time.LocalDateTime;
 import java.util.Objects;
 import java.util.Optional;
 
-
+@Slf4j
 @RestController
 @RequestMapping("/api/v1/contas")
 @RequiredArgsConstructor
@@ -63,6 +65,7 @@ public class ContaRestController {
     @PreAuthorize("hasRole('ADMIN')")
     @Operation(summary = "Atualizar uma conta")
     public ResponseEntity<ContaResponse> atualizarConta(@RequestBody ContaRequest contaRequest) {
+        log.info("Atualizar conta: {}", contaRequest);
         var contaDomainToUpdate = contaApiMapper.toDomain(contaRequest);
         var contaDomain = atualizarConta.execute(contaDomainToUpdate);
         return ResponseEntity.ok(contaApiMapper.toResponse(contaDomain));

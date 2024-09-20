@@ -18,9 +18,6 @@ public class DataPagamento {
             throw new CustomException(400,"A data de pagamento não pode ser no futuro.");
         }
 
-        if (Objects.isNull(dataPagamento)) {
-            throw new CustomException(400,"A data de pagamento é obrigatória.");
-        }
         this.dataPagamento = dataPagamento;
     }
 

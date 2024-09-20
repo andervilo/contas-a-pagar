@@ -18,10 +18,6 @@ class DataPagamentoFactoryTest {
         assertEquals(now, dataPagamento.getDataPagamento());
     }
 
-    @Test
-    void createWithNullDateThrowsException() {
-        assertThrows(CustomException.class, () -> DataPagamentoFactory.create(null));
-    }
 
     @Test
     void createWithFutureDateThrowsException() {

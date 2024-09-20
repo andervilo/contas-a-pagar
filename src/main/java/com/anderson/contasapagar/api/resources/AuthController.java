@@ -42,6 +42,8 @@ public class AuthController {
 
         HttpEntity<MultiValueMap<String, String>> entity
          = new HttpEntity<MultiValueMap<String,String>>(formData, headers);
+
+        System.out.println("LEYCLOAK_URL: "+ keycloakLoginUrl);
         
         var result = rt.postForEntity(keycloakLoginUrl, entity, String.class);
     
