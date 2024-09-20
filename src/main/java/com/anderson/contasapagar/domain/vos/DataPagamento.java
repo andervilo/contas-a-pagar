@@ -1,5 +1,6 @@
 package com.anderson.contasapagar.domain.vos;
 
+import com.anderson.contasapagar.domain.exceptions.CustomException;
 import lombok.Getter;
 
 import java.time.LocalDate;
@@ -14,7 +15,11 @@ public class DataPagamento {
 
     public DataPagamento(LocalDateTime dataPagamento) {
         if (!Objects.isNull(dataPagamento) && dataPagamento.isAfter(LocalDateTime.now())) {
-            throw new IllegalArgumentException("A data de pagamento não pode ser no futuro.");
+            throw new CustomException(400,"A data de pagamento não pode ser no futuro.");
+        }
+
+        if (Objects.isNull(dataPagamento)) {
+            throw new CustomException(400,"A data de pagamento é obrigatória.");
         }
         this.dataPagamento = dataPagamento;
     }
