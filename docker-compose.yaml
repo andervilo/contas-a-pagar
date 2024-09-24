@@ -24,7 +24,6 @@ services:
     image: quay.io/keycloak/keycloak:20.0.2
     container_name: keycloak
     environment:
-      KC_HOSTNAME: keycloak
       KC_HOSTNAME_PORT: 7080
       KC_HOSTNAME_STRICT_BACKCHANNEL: "true"
       KEYCLOAK_ADMIN: admin
@@ -61,7 +60,7 @@ services:
       DB_PASS: postgres
       KEYCLOACK_LOGIN_URL: http://keycloak:7080/realms/contas-a-pagar-ms/protocol/openid-connect/token
     ports:
-      - "8080:8080"
+      - "8081:8080"
     depends_on:
       - postgres
       - keycloak
